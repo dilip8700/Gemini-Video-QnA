@@ -1,6 +1,6 @@
 # Google AI Python SDK Example
 
-This project demonstrates how to use the Google AI Python SDK to upload files to Gemini and interact with the model.
+This project demonstrates how to use the Google AI Python SDK to upload a video to Gemini, process it, and interact with the model by asking questions about the video content.
 
 ## Getting Started
 
@@ -28,7 +28,7 @@ Make sure you have Python installed. You can download it from [python.org](https
 
 ### Usage
 
-1. Define the function to upload a file to Gemini:
+1. Save the following code in a file named `video_interaction_with_gemini.py`:
 
     ```python
     import os
@@ -41,11 +41,7 @@ Make sure you have Python installed. You can download it from [python.org](https
         file = genai.upload_file(path, mime_type=mime_type)
         print(f"Uploaded file '{file.display_name}' as: {file.uri}")
         return file
-    ```
 
-2. Define the function to wait for files to become active:
-
-    ```python
     def wait_for_files_active(files):
         print("Waiting for file processing...")
         for name in (file.name for file in files):
@@ -58,11 +54,7 @@ Make sure you have Python installed. You can download it from [python.org](https
                 raise Exception(f"File {file.name} failed to process")
         print("...all files ready")
         print()
-    ```
 
-3. Configure the model:
-
-    ```python
     generation_config = {
         "temperature": 1,
         "top_p": 0.95,
@@ -94,19 +86,11 @@ Make sure you have Python installed. You can download it from [python.org](https
         safety_settings=safety_settings,
         generation_config=generation_config,
     )
-    ```
 
-4. Upload a video file and wait for it to become active:
-
-    ```python
     video_path = input("Enter Your Video Path: ")
     files = [upload_to_gemini(video_path, mime_type="video/mp4")]
     wait_for_files_active(files)
-    ```
 
-5. Start a chat session and interact with the model:
-
-    ```python
     chat_session = model.start_chat(
         history=[
             {
@@ -117,11 +101,22 @@ Make sure you have Python installed. You can download it from [python.org](https
             },
         ]
     )
-    prompt = input("Please Ask A Question About Video: ")
+    prompt = input("Please Ask A Question About The Video: ")
     response = chat_session.send_message(prompt)
 
     print(response.text)
     ```
+
+2. Run the script:
+
+    ```sh
+    python video_interaction_with_gemini.py
+    ```
+
+3. Follow the prompts:
+    - Enter the path to your video file.
+    - Wait for the video to be processed.
+    - Ask a question about the video content when prompted.
 
 ### Contributing
 
@@ -135,4 +130,3 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 - [Google AI Python SDK Documentation](https://ai.google.dev/gemini-api/docs/get-started/python)
 - [Prompting with Media](https://ai.google.dev/gemini-api/docs/prompting_with_media)
-
