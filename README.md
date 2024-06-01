@@ -110,7 +110,7 @@ Make sure you have Python installed. You can download it from [python.org](https
 2. Run the script:
 
     ```sh
-    python video_interaction_with_gemini.py
+    python gemini_interaction.py
     ```
 
 3. Follow the prompts:
