@@ -12,7 +12,7 @@ import time
 	
 import google.generativeai as genai
 
-genai.configure(api_key="YOUR API KEY")
+genai.configure(api_key="YOUR_API_KEY")
 
 def upload_to_gemini(path, mime_type=None):
   """Uploads the given file to Gemini.
